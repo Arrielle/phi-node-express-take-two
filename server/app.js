@@ -9,6 +9,11 @@ var app = express(); //call the library as a function
 //a function that returns an object
 //express is a function within express
 
+//allows for req.body
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({extended: true}));
+
 //relationship between express and app is similar to below-
 
 // var taco = function(){
@@ -47,6 +52,12 @@ app.get('/fish/last/name', function(req, res){
 //handle the request for the name of the first fish
 app.get('/fish/first/name', function(req, res){
   res.send('Your fish is ' + fishiesList[0].name + "!"); //THIS IS THE RESPONSE IS NECCESSARY!! DON'T LEAVE THE BROWSER HANGING lmao
+});
+
+app.post('/fish/new', function(req, res){
+  var newFish = req.body;
+  fishiesList.push(newFish);
+  res.sendStatus(200);
 });
 
 app.listen(5000);

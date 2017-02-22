@@ -3,6 +3,7 @@ $(document).ready(function(){
   console.log('Log 1: jQuery was properly sourced');
   getFishList();
   getFirstFishName();
+  newFishFromUserInput();
 });//end doc.ready
 
 function getFishList() {
@@ -33,5 +34,20 @@ function getFirstFishName() {
 }
 
 function appendingFirstFishName(fishname) {
-    $('#firstFishy').append(fishname);
+    $('#firstFishy').text(fishname);
+}
+
+function newFishFromUserInput(){
+  $('#newFishButton').on('click', function(){
+    var newFishObject = {};
+    newFishObject.name = $('#newFishName').val();
+    $.ajax({
+      type: 'POST',
+      url: '/fish/new',
+      data: newFishObject, //POST needs a body (data)
+      success: function(response){
+        console.log(response);
+      }
+    })//ends ajax
+  });//ends onclick
 }
