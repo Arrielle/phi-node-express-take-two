@@ -20,4 +20,11 @@ var app = express(); //call the library as a function
 
 app.use(express.static('server/public')); //every time we get a request app.use() will run determines if the request is a request for a static file
 
+var fishiesList = [{name: 'walleye'}, {name: 'pike'}];
+
+app.get('/fish', function(req, res){
+  console.log('req', req);
+  res.send(fishiesList);
+});
+
 app.listen(5000);
