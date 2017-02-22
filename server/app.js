@@ -55,13 +55,21 @@ app.get('/fish/first/name', function(req, res){
 });
 
 app.post('/fish/new', function(req, res){
+  for (var i = 0; i < fishiesList.length; i++) {
+    if (req.body.name == fishiesList[i].name){
+      res.sendStatus(400);
+      req.body = null;
+    }
+  }
   if (req.body.name == ''){
-    res.sendStatus(500);
+    res.sendStatus(400);
+
   } else {
-  var newFish = req.body;
-  fishiesList.push(newFish);
-  res.sendStatus(200);
-}
+    var newFish = req.body;
+    fishiesList.push(newFish);
+    res.sendStatus(200);
+  }
+
 });
 
 app.listen(5000);
