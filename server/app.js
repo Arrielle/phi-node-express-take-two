@@ -20,11 +20,33 @@ var app = express(); //call the library as a function
 
 app.use(express.static('server/public')); //every time we get a request app.use() will run determines if the request is a request for a static file
 
-var fishiesList = [{name: 'walleye'}, {name: 'pike'}];
+var fishiesList = [{name: 'walleye'}, {name: 'pike'}, {name: 'muskie'}, {name: 'sunfish'}, {name: 'pufferfish'}];
 
+//requesting entire fishies array
 app.get('/fish', function(req, res){
-  console.log('req', req);
-  res.send(fishiesList);
+  res.send(fishiesList); //THIS IS THE RESPONSE IS NECCESSARY!! DON'T LEAVE THE BROWSER HANGING lmao
+});
+
+//requesting only first fish object in the fishies array
+app.get('/fish/first', function(req, res){
+  res.send(fishiesList[0]); //THIS IS THE RESPONSE IS NECCESSARY!! DON'T LEAVE THE BROWSER HANGING lmao
+});
+
+//requesting only last fish object in the fishies array
+app.get('/fish/last', function(req, res){
+  var lastIndex = fishiesList.length - 1;
+  res.send(fishiesList[lastIndex]);
+});
+
+//handle request for the name of the last fish
+app.get('/fish/last/name', function(req, res){
+  var lastIndex = fishiesList.length - 1;
+  res.send('Your fish is ' + fishiesList[lastIndex].name + "!");
+});
+
+//handle the request for the name of the first fish
+app.get('/fish/first/name', function(req, res){
+  res.send('Your fish is ' + fishiesList[0].name + "!"); //THIS IS THE RESPONSE IS NECCESSARY!! DON'T LEAVE THE BROWSER HANGING lmao
 });
 
 app.listen(5000);
