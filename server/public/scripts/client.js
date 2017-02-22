@@ -1,18 +1,18 @@
-console.log('Log 0: Client.js is in!!!');
 $(document).ready(function(){
-  console.log('Log 1: jQuery was properly sourced');
-  getFishList();
   getFirstFishName();
   newFishFromUserInput();
 });//end doc.ready
+
+//SO MANY FUNCTIONS
 
 function getFishList() {
   $.ajax({
     type: 'GET',
     url: '/fish', //we are returning the fishies array and is the response?
     success: function(response){ //this function runs upon a successful completion of the response (ajax request has beens successful)
+      $('#fishTank').empty();
       appendingFish(response);
-      appendingFirstFishName(response);
+      // appendingFirstFishName(response);
     }//ends success
   });//ends ajax
 }
@@ -28,16 +28,13 @@ function getFirstFishName() {
     type: 'GET',
     url: '/fish/first/name', //we are returning the fishies array and is the response?
     success: function(response){ //this function runs upon a successful completion of the response (ajax request has beens successful)
-      appendingFirstFishName(response);
+      $('#firstFishy').text(response);
     }//ends success
   });//ends ajax
 }
 
-function appendingFirstFishName(fishname) {
-    $('#firstFishy').text(fishname);
-}
-
 function newFishFromUserInput(){
+  getFishList();
   $('#newFishButton').on('click', function(){
     var newFishObject = {};
     newFishObject.name = $('#newFishName').val();
@@ -46,8 +43,13 @@ function newFishFromUserInput(){
       url: '/fish/new',
       data: newFishObject, //POST needs a body (data)
       success: function(response){
-        console.log(response);
+        getFishList();
       }
     })//ends ajax
   });//ends onclick
 }
+
+var error = function(error){
+          if(error.responseText == 'showAlert')
+              alert("Please enter correct user name and password.")
+            }

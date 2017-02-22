@@ -55,9 +55,13 @@ app.get('/fish/first/name', function(req, res){
 });
 
 app.post('/fish/new', function(req, res){
+  if (req.body.name == ''){
+    res.sendStatus(500);
+  } else {
   var newFish = req.body;
   fishiesList.push(newFish);
   res.sendStatus(200);
+}
 });
 
 app.listen(5000);
