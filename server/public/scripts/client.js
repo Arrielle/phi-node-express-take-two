@@ -48,3 +48,31 @@ function newFishFromUserInput(){
     })//ends ajax
   });//ends onclick
 }
+
+
+//BELOW - Trying to get the h1 to show the user error;
+
+// function newFishFromUserInput(){
+//   getFishList();
+//   $('#newFishButton').on('click', function(){
+//     var newFishObject = {};
+//     newFishObject.name = $('#newFishName').val();
+//     $.ajax({
+//       type: 'POST',
+//       url: '/fish/new',
+//       data: newFishObject, //POST needs a body (data)
+//       success: function(response){
+//         for (var i = 0; i < fishiesList.length; i++) {
+//           if (newFishObject.name == fishiesList[i].name){
+//             $('#firstFishy').text('That fish is already on the list! Please enter a new fish.');
+//           }
+//         }
+//         if (newFishObject.name == ''){
+//           $('#firstFishy').text('Please enter the name of your fish.');
+//
+//         }
+//         getFishList();
+//       }
+//     })//ends ajax
+//   });//ends onclick
+// }
