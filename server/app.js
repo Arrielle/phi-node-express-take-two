@@ -27,9 +27,9 @@ app.use(express.static('server/public')); //every time we get a request app.use(
 
 var fishiesList = [{name: 'walleye'}, {name: 'pike'}, {name: 'muskie'}, {name: 'sunfish'}, {name: 'pufferfish'}];
 
-// for (var i = 0; i < fishiesList.length; i++) {
-//   fishiesList[i].dateAdded = Date();
-// }
+for (var i = 0; i < fishiesList.length; i++) {
+  fishiesList[i].dateAdded = Date();
+}
 
 //requesting entire fishies array
 app.get('/fish', function(req, res){
