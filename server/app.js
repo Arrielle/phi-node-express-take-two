@@ -27,6 +27,10 @@ app.use(express.static('server/public')); //every time we get a request app.use(
 
 var fishiesList = [{name: 'walleye'}, {name: 'pike'}, {name: 'muskie'}, {name: 'sunfish'}, {name: 'pufferfish'}];
 
+for (var i = 0; i < fishiesList.length; i++) {
+  fishiesList[i].dateAdded = Date();
+}
+
 //requesting entire fishies array
 app.get('/fish', function(req, res){
   res.send(fishiesList); //THIS IS THE RESPONSE IS NECCESSARY!! DON'T LEAVE THE BROWSER HANGING lmao
@@ -67,6 +71,9 @@ app.post('/fish/new', function(req, res){
   } else {
     var newFish = req.body;
     fishiesList.push(newFish);
+    for (var i = 0; i < fishiesList.length; i++) {
+      fishiesList[i].dateAdded = Date();
+    }
     res.sendStatus(200);
   }
 

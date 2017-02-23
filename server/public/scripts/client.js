@@ -10,7 +10,7 @@ function getFishList() {
     type: 'GET',
     url: '/fish', //we are returning the fishies array and is the response?
     success: function(response){ //this function runs upon a successful completion of the response (ajax request has beens successful)
-      $('#fishTank').empty();
+      $('#fishTable').empty();
       appendingFish(response);
       // appendingFirstFishName(response);
     }//ends success
@@ -19,7 +19,7 @@ function getFishList() {
 
 function appendingFish(array) {
   for (var i = 0; i < array.length; i++) {
-    $('#fishTank').append('<li>' + array[i].name + '</li>');
+    $('#fishTable').append('<tr><td>' + array[i].name + '</td><td>' + array[i].dateAdded + '</td></tr>');
   }
 }
 
@@ -48,8 +48,3 @@ function newFishFromUserInput(){
     })//ends ajax
   });//ends onclick
 }
-
-var error = function(error){
-          if(error.responseText == 'showAlert')
-              alert("Please enter correct user name and password.")
-            }
