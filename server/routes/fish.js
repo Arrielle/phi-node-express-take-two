@@ -37,21 +37,23 @@ router.get('/first/name', function(req, res){
 });
 
 router.post('/new', function(req, res, err){
-  for (var i = 0; i < fishiesList.length; i++) {
-    if (req.body.name == fishiesList[i].name){
-      req.body = null;
-      res.status(500).send("You've already caught that fish. NEW FISH ONLY!")
-    }
-  }
+  var matchFound = false;
   if (req.body.name == ''){
     res.status(500).send("Don't forget your fish!!")
-
+  }
+  for (var i = 0; i < fishiesList.length; i++) {
+    if (req.body.name == fishiesList[i].name){
+      matchFound = true;
+      break;
+    }
+  }
+  if (matchFound == true){
+    req.body = null;
+    res.status(500).send("You've already caught that fish. NEW FISH ONLY!");
   } else {
     var newFish = req.body;
+    newFish.dateAdded = Date();
     fishiesList.push(newFish);
-    for (var i = 0; i < fishiesList.length; i++) {
-      fishiesList[i].dateAdded = Date();
-    }
     res.sendStatus(200);
   }
 
