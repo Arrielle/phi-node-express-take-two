@@ -44,6 +44,11 @@ function newFishFromUserInput(){
       data: newFishObject, //POST needs a body (data)
       success: function(response){
         getFishList();
+        $('#firstFishy').text('Nice catch!');
+      },
+      error: function(error){
+        error = error.responseText;
+        $('#firstFishy').text(error);
       }
     })//ends ajax
   });//ends onclick
